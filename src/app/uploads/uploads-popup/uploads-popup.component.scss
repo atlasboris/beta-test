@@ -3,6 +3,8 @@
     position: absolute;
     bottom: 0;
     right: 15px;
+    z-index: 10;
+    background-color: #fff;
     .popup-header {
         border-radius: 3px 3px 0 0;
         border: solid #333;
@@ -30,6 +32,29 @@
         border: solid #333;
         height: 300px;
         transition: height 2s;
+
+
+        .progress-container {
+            display: flex;
+            border: 1px dashed #555;
+            padding: 10px;
+            margin: 10px;
+            .fa-file {
+                font-size: 41px;
+                color: #999;
+                margin: 0 5px 0 0;
+            }
+
+            .progress-bar-wrap {
+                width: 80%;
+
+                .file-name {
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                }
+            }
+        }
     }
     &.collapsed {
         .popup-content {
@@ -40,12 +65,4 @@
             transform: rotate(180deg);
         }
     }
-}
-
-.popup-visible {
-    display: block;
-}
-
-.popup-hidden {
-    display: none;
 }

@@ -1,0 +1,5 @@
+<input type="file" multiple class="text-nowrap text-truncate" (change)="selectFile($event)" />
+
+<button [disabled]="!selectedFiles" (click)="uploadFiles()">Upload</button>
+
+<app-uploads-popup [progressInfos]="progressInfos"></app-uploads-popup>
