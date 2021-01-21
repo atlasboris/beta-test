@@ -7,11 +7,4 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'beta-test';
-  On: boolean = false;
-  filesNumber: number = 4;
-  isCollapsed: boolean = false;
-
-  togglePopup() {
-    this.On = !this.On;
-  }
 }
