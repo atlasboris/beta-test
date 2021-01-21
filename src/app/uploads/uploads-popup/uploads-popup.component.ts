@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FileUploadService } from '../shared/upload.service';
 
 @Component({
   selector: 'app-uploads-popup',
@@ -10,8 +11,14 @@ export class UploadsPopupComponent {
   On: boolean = true;
   isCollapsed: boolean = false;
 
+  constructor(private uploadService: FileUploadService) { }
+
   togglePopup() {
     this.On = !this.On;
+  }
+
+  cancelAll() {
+    this.uploadService.cancelAll();
   }
 
 }

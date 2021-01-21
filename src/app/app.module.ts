@@ -13,6 +13,7 @@ import { UploadDetailComponent } from './uploads/upload-detail/upload-detail.com
 import { UploadsListComponent } from './uploads/uploads-list/uploads-list.component';
 import { CommonModule } from '@angular/common';
 import { UploadsPopupComponent } from './uploads/uploads-popup/uploads-popup.component';
+import { UploadsProgressbarComponent } from './uploads/uploads-progressbar/uploads-progressbar.component';
 
 
 
@@ -22,7 +23,8 @@ import { UploadsPopupComponent } from './uploads/uploads-popup/uploads-popup.com
     UploadFormComponent,
     UploadDetailComponent,
     UploadsListComponent,
-    UploadsPopupComponent
+    UploadsPopupComponent,
+    UploadsProgressbarComponent
   ],
   imports: [
     BrowserModule,

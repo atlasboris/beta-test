@@ -1,0 +1,29 @@
+.progress-container {
+    display: flex;
+    border: 1px dashed #555;
+    padding: 10px;
+    margin: 10px;
+    .fa-file {
+        font-size: 41px;
+        color: #999;
+    }
+
+    .progress-bar-wrap {
+        width: 80%;
+        margin: 0 10px;
+        .file-name {
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+    }
+
+    .progress-info-icons {
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        .fa-trash-alt:hover {
+            cursor: pointer;
+        }
+    }
+}

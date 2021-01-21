@@ -22,24 +22,32 @@ export class UploadFormComponent {
   }
 
   uploadFiles() {
+    this.progressInfos = [];
+    this.uploadService.resetData();
     for (let i = 0; i < this.selectedFiles?.length; i++) {
       this.upload(i, this.selectedFiles[i]);
     }
   }
 
-  upload(i: number,file) {
-
-    this.progressInfos[i] = { value: 0, fileName: file.name };
+  upload(i: number, file) {
+    console.log(file);
+    this.progressInfos[i] = { value: 0, fileName: file.name, size: this.convertKb(file.size) };
 
     this.uploadService.pushFileToStorage(new FileUpload(file))
       .subscribe(
         (percent: number) => {
           this.progressInfos[i].value = Math.round(percent);
         },
-        error => {
-          console.log(error);
+        (error) => {
+          console.log("canceled task: ",error);
         }
       );
+  }
+
+  convertKb(kb) {
+    let size;
+    //
+    return size
   }
 
 }

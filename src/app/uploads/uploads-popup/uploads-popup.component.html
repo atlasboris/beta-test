@@ -1,4 +1,4 @@
-<ng-container>
+
     <div *ngIf="progressInfos && progressInfos.length && On">
         <div class="upload-popup" [ngClass]="{'collapsed':isCollapsed}">
             <div class="popup-header">
@@ -6,32 +6,12 @@
                     Uploading {{progressInfos?.length}} items.
                 </div>
                 <i class="fas fa-angle-down" (click)="isCollapsed=!isCollapsed"></i>
-                <i class="fas fa-times" (click)="On=false"></i>
+                <i class="fas fa-times" (click)="cancelAll()"></i>
             </div>
             <div class="popup-content">
-                <div *ngFor="let progressInfo of progressInfos">
-                    <div class="progress-container">
-                            <i class="far fa-file"></i>
-                            <div class="progress-bar-wrap">
-                                <div class="file-name">{{ progressInfo.fileName }}</div>
-                                <div class="progress">
-                                    <div
-                                        class="progress-bar progress-bar-info progress-bar-striped"
-                                        role="progressbar"
-                                        attr.aria-valuenow="{{ progressInfo.value }}"
-                                        aria-valuemin="0"
-                                        aria-valuemax="100"
-                                        [ngStyle]="{ width: progressInfo.value + '%' }">
-                                        {{ progressInfo.value }}%
-                                    </div>
-                                </div>
-                            </div>
-                            <i class="far fa-trash-alt" *ngIf="+progressInfo.value!==100"></i>
-                            <i class="far fa-check-circle" *ngIf="+progressInfo.value==100"></i>
-                        </div>
-
+                <div *ngFor="let progressInfo of progressInfos; let i = index">
+                    <app-uploads-progressbar [progressInfo]="progressInfo" [idx]="i"></app-uploads-progressbar>
                 </div>
             </div>
         </div>
     </div>
-</ng-container>
