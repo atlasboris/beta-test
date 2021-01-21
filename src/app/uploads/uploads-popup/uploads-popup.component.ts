@@ -8,14 +8,9 @@ import { FileUploadService } from '../shared/upload.service';
 })
 export class UploadsPopupComponent {
   @Input() progressInfos: any[] = [];
-  On: boolean = true;
   isCollapsed: boolean = false;
 
   constructor(private uploadService: FileUploadService) { }
-
-  togglePopup() {
-    this.On = !this.On;
-  }
 
   cancelAll() {
     this.uploadService.cancelAll();
