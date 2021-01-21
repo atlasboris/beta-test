@@ -1,4 +1,5 @@
-import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { FileUpload } from '../shared/upload.model';
 import { FileUploadService } from '../shared/upload.service';
 
@@ -7,16 +8,14 @@ import { FileUploadService } from '../shared/upload.service';
   templateUrl: './upload-form.component.html',
   styleUrls: ['./upload-form.component.scss']
 })
-export class UploadFormComponent {
+export class UploadFormComponent implements OnDestroy {
   @ViewChild('inputFile') inputFile: ElementRef;
-
   selectedFiles: FileList;
-  // currentFileUpload: FileUpload;
   filesUpload: FileUpload[];
   progressInfos = [];
-  percentage: number;
-
+  private subscriptions: Subscription[] = [];
   constructor(private uploadService: FileUploadService) { }
+
 
   selectFile(event) {
     this.progressInfos = [];
@@ -33,28 +32,25 @@ export class UploadFormComponent {
   }
 
   upload(i: number, file) {
-    console.log(file);
-    this.progressInfos[i] = { value: 0, fileName: file.name, size: this.convertKb(file.size) };
-
-    this.uploadService.pushFileToStorage(new FileUpload(file))
-      .subscribe(
-        (percent: number) => {
-          this.progressInfos[i].value = Math.round(percent);
-        },
-        (error) => {
-          console.log("canceled task: ", error);
-        }
-      );
+    this.progressInfos[i] = { value: 0, fileName: file.name };
+    let uploadSub$: Subscription =
+      this.uploadService.pushFileToStorage(new FileUpload(file))
+        .subscribe(
+          (percent: number) => {
+            this.progressInfos[i].value = Math.round(percent);
+          },
+          (error) => {
+            console.log("canceled task: ", error);
+          }
+        );
+    this.subscriptions.push(uploadSub$);
   }
 
   resetIput() {
     this.inputFile.nativeElement.value = '';
   }
 
-  convertKb(kb) {
-    let size;
-    //
-    return size
+  ngOnDestroy() {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
-
 }
