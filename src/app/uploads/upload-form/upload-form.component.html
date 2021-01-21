@@ -1,4 +1,4 @@
-<input type="file" multiple class="text-nowrap text-truncate" (change)="selectFile($event)" />
+<input type="file" multiple class="text-nowrap text-truncate" (change)="selectFile($event)" #inputFile/>
 
 <button [disabled]="!selectedFiles" (click)="uploadFiles()">Upload</button>
 
